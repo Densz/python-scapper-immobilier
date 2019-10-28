@@ -1,23 +1,16 @@
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+from src.Form import Form
+from src.GoogleSheet import GoogleSheet
 from pprint import pprint
 
-scope = [
-    "https://spreadsheets.google.com/feeds",
-    'https://www.googleapis.com/auth/spreadsheets',
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-]
-creds = ServiceAccountCredentials.from_json_keyfile_name(
-    "./config/credentials.json", scope)
-client = gspread.authorize(creds)
 
-sheet = client.open("Immobilier").sheet1
+class App:
+    def __init__(self):
+        self.form = Form()
+        self.gSheet = GoogleSheet()
 
-data = sheet.get_all_records()
-pprint(data)
+    def main(self):
+        self.form.get_form()
+        print(self.form.get_result())
 
-numRows = sheet.row_count
 
-insertRow = ["hello", 5, "red", "blue"]
-sheet.insert_row(insertRow, 8)
+App().main()
