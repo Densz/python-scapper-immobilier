@@ -1,16 +1,20 @@
 from src.Form import Form
 from src.GoogleSheet import GoogleSheet
+from src.Scrapper import Scrapper
 from pprint import pprint
 
 
 class App:
     def __init__(self):
-        self.form = Form()
+        self.formInput = {}
         self.gSheet = GoogleSheet()
 
     def main(self):
-        self.form.get_form()
-        print(self.form.get_result())
+        form = Form()
+
+        form.display_form()
+        formInput = form.get_result()
+        scrapper = Scrapper(formInput)
 
 
 App().main()

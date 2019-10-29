@@ -1,3 +1,7 @@
+from __future__ import print_function, unicode_literals
+from PyInquirer import prompt, print_json
+
+
 class Form:
     def __init__(self):
         # Dictionaries
@@ -8,20 +12,37 @@ class Form:
         }
 
     def __ask_website(self):
-        s = input("Select which website")
-        self.__formResult['website'] = s
-        return 1
+        options = ['All', 'SeLoger', 'LeBonCoin']
+        question = {
+            'type': 'list',
+            'name': 'website',
+            'message': 'Select website to scrap',
+            'choices': options
+        }
+        return prompt(question)['website']
 
     def __ask_department(self):
-        return 0
+        question = {
+            'type': 'input',
+            'name': 'department',
+            'message': 'Please enter the department (eg: 75011):'
+        }
+        return prompt(question)['department']
 
     def __ask_budget_limit(self):
-        return 0
+        question = {
+            'type': 'input',
+            'name': 'budget',
+            'message': 'What is your budget:'
+        }
+        return prompt(question)['budget']
 
-    def get_form(self):
-        self.__ask_website()
-        self.__ask_department()
-        self.__ask_budget_limit()
+    def display_form(self):
+        self.__formResult = {
+            'website': self.__ask_website(),
+            'department': self.__ask_department(),
+            'budget': self.__ask_budget_limit(),
+        }
 
     def get_result(self):
         return self.__formResult

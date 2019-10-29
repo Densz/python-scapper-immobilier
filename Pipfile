@@ -10,6 +10,7 @@ gspread = "*"
 oauth2client = "*"
 autopep8 = "*"
 pprint = "*"
+pyinquirer = "*"
 
 [requires]
 python_version = "3.7"
